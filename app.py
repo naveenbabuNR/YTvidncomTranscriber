@@ -1,5 +1,4 @@
 import streamlit as st
-import base64
 from dotenv import load_dotenv
 import os
 import google.generativeai as genai
@@ -218,20 +217,6 @@ if section == "Summarizer":
                         st.subheader("Full Transcript:")
                         st.write(transcript_text)
                     
-                    if st.button("Download Transcript"):
-                        st.download_button(
-                            label="Download Transcript",
-                            data=transcript_text.encode('utf-8'),
-                            file_name="transcript.txt",
-                            mime='text/plain'
-                        )
-                        # Encode the transcript text using UTF-8
-                        encoded_transcript = transcript_text.encode('utf-8')
-
-                        # Create a download link with the encoded data
-                        b64 = base64.b64encode(encoded_transcript).decode()
-                        href = f'<a href="data:text/plain;base64,{b64}" download="transcript.txt" class="download-link">Download Transcript</a>'
-                        st.markdown(href, unsafe_allow_html=True)
                 else:
                     st.error("Failed to generate summary.")
             else:
